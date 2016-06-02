@@ -94,15 +94,53 @@ define inline_script question_script
 	my_canvas.show()
 	exp.sleep(tick)
 	
+	
+	
 	# Show the stimuli
-	my_canvas.clear()
-	my_canvas.image(exp.get_file('stimuli/{0}'.format(stimulus)),True)
-	my_canvas.image(yes_button, False, 0, 0)
-	my_canvas.image(no_button, False, 2*mx - response_w, 0)
-	my_canvas.show()
-	# Show the mouse, and move it to the starting point
-	my_mouse.show_cursor(show=True)
-	my_mouse.set_pos(pos=(mx, (2*my)-half_start_h))
+	
+	if SOAcondition=='neutral':
+		my_canvas.clear()
+		my_canvas.image(exp.get_file('stimuli/{0}'.format(stimulus)),True)
+		my_canvas.image(yes_button, False, 0, 0)
+		my_canvas.image(no_button, False, 2*mx - response_w, 0)
+		my_canvas.show()
+		# Show the mouse, and move it to the starting point
+		my_mouse.show_cursor(show=True)
+		my_mouse.set_pos(pos=(mx, (2*my)-half_start_h))
+	
+	elif SOAcondition=='negative' and operation=='add':
+		my_canvas.clear()
+		my_canvas.image(exp.get_file('stimuli/addPreview.jpg'),True)
+		my_canvas.image(yes_button, False, 0, 0)
+		my_canvas.image(no_button, False, 2*mx - response_w, 0)
+		my_canvas.show()
+		exp.sleep(150)
+		my_canvas.clear()
+		my_canvas.image(yes_button, False, 0, 0)
+		my_canvas.image(no_button, False, 2*mx - response_w, 0)
+		my_canvas.image(exp.get_file('stimuli/{0}'.format(stimulus)),True)
+		
+		my_canvas.show()
+		# Show the mouse, and move it to the starting point
+		my_mouse.show_cursor(show=True)
+		my_mouse.set_pos(pos=(mx, (2*my)-half_start_h))
+	
+	elif SOAcondition=='negative' and operation=='mult':
+		my_canvas.clear()
+		my_canvas.image(exp.get_file('stimuli/multPreview.jpg'),True)
+		my_canvas.image(yes_button, False, 0, 0)
+		my_canvas.image(no_button, False, 2*mx - response_w, 0)
+		my_canvas.show()
+		exp.sleep(150)
+		my_canvas.clear()
+		my_canvas.image(exp.get_file('stimuli/{0}'.format(stimulus)),True)
+		my_canvas.image(yes_button, False, 0, 0)
+		my_canvas.image(no_button, False, 2*mx - response_w, 0)
+		my_canvas.show()
+		# Show the mouse, and move it to the starting point
+		my_mouse.show_cursor(show=True)
+		my_mouse.set_pos(pos=(mx, (2*my)-half_start_h))
+	
 	
 	# The actual mouse tracking
 	t0 = start = exp.time()
@@ -215,9 +253,12 @@ define inline_script question_script
 	sure of your response yet\n\
 	Press any key to continue."
 	error_message = "<span color='red'>X</span>"
+	
 	# Turn our OpenSesame variables into plain Python ones
 	stimulus = exp.get('stimulus')
 	truth = exp.get('truth')
+	SOAcondition = exp.get('SOAcondition')
+	operation = exp.get('operation')
 	
 	# Some dimensions
 	# Our start button is 80x80 pixels.
@@ -257,39 +298,79 @@ define loop trial_loop
 	set offset no
 	set item trial_sequence
 	set description "Repeatedly runs another item"
-	set cycles 10
-	set column_order "stimulus;truth;weight"
+	set cycles 14
+	set column_order "stimulus;truth;weight;SOAcondition;operation"
 	set break_if never
 	setcycle 0 stimulus "2_7_add_FI.jpg"
-	setcycle 0 truth "false"
+	setcycle 0 SOAcondition "neutral"
+	setcycle 0 operation "add"
 	setcycle 0 weight "1"
+	setcycle 0 truth "false"
 	setcycle 1 stimulus "2_7_add_FNI.jpg"
-	setcycle 1 truth "false"
+	setcycle 1 SOAcondition "neutral"
+	setcycle 1 operation "add"
 	setcycle 1 weight "1"
+	setcycle 1 truth "false"
 	setcycle 2 stimulus "2_7_add_true.jpg"
-	setcycle 2 truth "true"
+	setcycle 2 SOAcondition "neutral"
+	setcycle 2 operation "add"
 	setcycle 2 weight "2"
+	setcycle 2 truth "true"
 	setcycle 3 stimulus "2_7_add_true.jpg"
-	setcycle 3 truth "true"
+	setcycle 3 SOAcondition "neutral"
+	setcycle 3 operation "add"
 	setcycle 3 weight "2"
-	setcycle 4 stimulus "2_7_mult_FI.jpg"
-	setcycle 4 truth "false"
-	setcycle 4 weight "1"
-	setcycle 5 stimulus "2_7_mult_FNI.jpg"
-	setcycle 5 truth "false"
-	setcycle 5 weight "1"
-	setcycle 6 stimulus "2_7_mult_true.jpg"
-	setcycle 6 truth "true"
-	setcycle 6 weight "2"
-	setcycle 7 stimulus "2_7_mult_true.jpg"
-	setcycle 7 truth "true"
-	setcycle 7 weight "2"
-	setcycle 8 stimulus "3_6_add_FI.jpg"
-	setcycle 8 truth "false"
-	setcycle 8 weight "1"
-	setcycle 9 stimulus "3_6_add_FNI.jpg"
-	setcycle 9 truth "false"
-	setcycle 9 weight "1"
+	setcycle 3 truth "true"
+	setcycle 4 stimulus "2_7_add_true.jpg"
+	setcycle 4 SOAcondition "neutral"
+	setcycle 4 operation "add"
+	setcycle 4 weight "2"
+	setcycle 4 truth "true"
+	setcycle 5 stimulus "2_7_add_true.jpg"
+	setcycle 5 SOAcondition "neutral"
+	setcycle 5 operation "add"
+	setcycle 5 weight "2"
+	setcycle 5 truth "true"
+	setcycle 6 stimulus "2_7_mult_FI.jpg"
+	setcycle 6 SOAcondition "neutral"
+	setcycle 6 operation "mult"
+	setcycle 6 weight "1"
+	setcycle 6 truth "false"
+	setcycle 7 stimulus "2_7_mult_FNI.jpg"
+	setcycle 7 SOAcondition "negative"
+	setcycle 7 operation "mult"
+	setcycle 7 weight "1"
+	setcycle 7 truth "false"
+	setcycle 8 stimulus "2_7_mult_true.jpg"
+	setcycle 8 SOAcondition "negative"
+	setcycle 8 operation "mult"
+	setcycle 8 weight "2"
+	setcycle 8 truth "true"
+	setcycle 9 stimulus "2_7_mult_true.jpg"
+	setcycle 9 SOAcondition "negative"
+	setcycle 9 operation "mult"
+	setcycle 9 weight "2"
+	setcycle 9 truth "true"
+	setcycle 10 stimulus "2_7_mult_true.jpg"
+	setcycle 10 SOAcondition "negative"
+	setcycle 10 operation "mult"
+	setcycle 10 weight "2"
+	setcycle 10 truth "true"
+	setcycle 11 stimulus "2_7_mult_true.jpg"
+	setcycle 11 SOAcondition "negative"
+	setcycle 11 operation "mult"
+	setcycle 11 weight "2"
+	setcycle 11 truth "true"
+	setcycle 12 stimulus "3_6_add_FI.jpg"
+	setcycle 12 SOAcondition "negative"
+	setcycle 12 operation "add"
+	setcycle 12 weight "1"
+	setcycle 12 truth "false"
+	setcycle 13 stimulus "3_6_add_FNI.jpg"
+	setcycle 13 SOAcondition "negative"
+	setcycle 13 operation "add"
+	setcycle 13 weight "1"
+	setcycle 13 truth "false"
 	run trial_sequence
 
 define sequence trial_sequence
