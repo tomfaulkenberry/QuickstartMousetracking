@@ -16,7 +16,7 @@ set mouse_backend legacy
 set keyboard_backend legacy
 set height 800
 set foreground black
-set font_size 20
+set font_size 24
 set font_italic no
 set font_family mono
 set font_bold no
@@ -210,6 +210,10 @@ define inline_script question_script
 	# Show a message if wrong answer (optional)
 	if (accuracy == 0 and not timed_out):
 		my_canvas.clear()
+		my_canvas.rect(x=0,y=0,w=response_w,h=response_h,fill=True)  # left response button
+		my_canvas.rect(x=2*mx-response_w,y=0,w=response_w,h=response_h,fill=True)  # right response button
+		my_canvas.text("True",x=0.5*response_w,y=0.5*response_h,color='white')
+		my_canvas.text("False",x=2*mx-0.5*response_w,y=0.5*response_h,color='white')
 		my_canvas.text('X',color="red")
 		my_canvas.show()
 		exp.sleep(1000)
@@ -217,6 +221,10 @@ define inline_script question_script
 	# Show a message if the trial has timed out without a response
 	if timed_out:
 		my_canvas.clear()
+		my_canvas.rect(x=0,y=0,w=response_w,h=response_h,fill=True)  # left response button
+		my_canvas.rect(x=2*mx-response_w,y=0,w=response_w,h=response_h,fill=True)  # right response button
+		my_canvas.text("True",x=0.5*response_w,y=0.5*response_h,color='white')
+		my_canvas.text("False",x=2*mx-0.5*response_w,y=0.5*response_h,color='white')
 		my_canvas.text(timeout_message)
 		my_canvas.show()
 		timed_out = False
@@ -237,6 +245,10 @@ define inline_script question_script
 	if (slow_start and not timed_out):
 		my_canvas.clear()
 		my_canvas.text(slow_start_message)
+		my_canvas.rect(x=0,y=0,w=response_w,h=response_h,fill=True)  # left response button
+		my_canvas.rect(x=2*mx-response_w,y=0,w=response_w,h=response_h,fill=True)  # right response button
+		my_canvas.text("True",x=0.5*response_w,y=0.5*response_h,color='white')
+		my_canvas.text("False",x=2*mx-0.5*response_w,y=0.5*response_h,color='white')
 		my_canvas.show()
 		timed_out = False
 		my_keyboard.get_key()
