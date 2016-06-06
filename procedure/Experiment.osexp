@@ -1,9 +1,9 @@
 ---
 API: 2
-OpenSesame: 3.0.7
+OpenSesame: 3.0.7b1
 Platform: posix
 ---
-set width 1200
+set width 1680
 set uniform_coordinates no
 set transparent_variables no
 set title "MouseTrack True or False"
@@ -14,13 +14,13 @@ set start experiment
 set sampler_backend legacy
 set mouse_backend legacy
 set keyboard_backend legacy
-set height 800
+set height 1050
 set foreground black
 set font_size 24
 set font_italic no
 set font_family mono
 set font_bold no
-set experiment_path "/Users/tom/github/mousetrackingOperatorPreviewEffect/procedure"
+set experiment_path "/home/mathcog/Desktop/mousetrackingOperatorPreviewEffect/procedure"
 set description "A simple template for the mouse-tracking paradigm"
 set custom_cursor no
 set coordinates relative
