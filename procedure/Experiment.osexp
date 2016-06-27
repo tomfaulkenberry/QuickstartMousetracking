@@ -1,6 +1,6 @@
 ---
 API: 2
-OpenSesame: 3.0.7
+OpenSesame: 3.0.7b1
 Platform: posix
 ---
 set width 1680
@@ -20,7 +20,7 @@ set font_size 24
 set font_italic no
 set font_family mono
 set font_bold no
-set experiment_path "/Users/tom/github/mousetrackingOperatorPreviewEffect/procedure"
+set experiment_path "/home/mathcog/Desktop/mousetrackingOperatorPreviewEffect/procedure"
 set description "A simple template for the mouse-tracking paradigm"
 set custom_cursor no
 set coordinates relative
@@ -41,7 +41,7 @@ define sequence block2_sequence
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
 	run mousetracking_script_block2 always
-	run logger_1 always
+	run logger always
 
 define loop block_1
 	set skip 0
@@ -1393,28 +1393,6 @@ define logger logger
 	log xTrajectory
 	log yTrajectory
 	log tTrajectory
-	log count_trial_sequence
-	log stimulus
-	log truth
-	log operation
-	log size
-	log SOAcondition
-
-define logger logger_1
-	set use_quotes yes
-	set ignore_missing yes
-	set description "Logs experimental data"
-	set auto_log no
-	log height
-	log subject_nr
-	log width
-	log response
-	log accuracy
-	log rt
-	log xTrajectory
-	log yTrajectory
-	log tTrajectory
-	log count_trial_sequence
 	log stimulus
 	log truth
 	log operation
@@ -1627,6 +1605,7 @@ define inline_script mousetracking_script_block1
 	self.experiment.set("xTrajectory", str(xList))
 	self.experiment.set("yTrajectory", str(yList))
 	self.experiment.set("tTrajectory", str(tList))
+	#self.experiment.set("trialNumber", count_block1_sequence)
 	__end__
 	___prepare__
 	# Constants
@@ -1883,6 +1862,7 @@ define inline_script mousetracking_script_block2
 	self.experiment.set("xTrajectory", str(xList))
 	self.experiment.set("yTrajectory", str(yList))
 	self.experiment.set("tTrajectory", str(tList))
+	#self.experiment.set("trialNumber",count_block2_sequence+128)
 	__end__
 	___prepare__
 	# Constants
