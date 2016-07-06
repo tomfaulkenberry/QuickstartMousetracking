@@ -33,8 +33,8 @@ data['x'] = data.xTrajectory.map(squeak.list_from_string)
 data['y'] = data.yTrajectory.map(squeak.list_from_string)
 
 data['y'] = data.y * -1 # Reverse y axis
-#data['x'] = data.x.map(squeak.remap_right) # Flip the leftward responses
-data['x'] = data.x.apply(squeak.normalize_space,preserve_direction=True)
+data['x'] = data.x.map(squeak.remap_right) # Flip the leftward responses
+data['x'] = data.x.apply(squeak.normalize_space,preserve_direction=False)
 data['y'] = data.y.map(squeak.normalize_space) * 1.5
 
 
