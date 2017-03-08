@@ -9,14 +9,16 @@ setwd("~/github/mousetrackingOperatorPreviewEffect/results/")
 source("helperFunctions.R")
 
 summaryMeasures <- read.csv("processed2.csv")
+summaryMeasures2<-read.csv("processed.csv")
 xNorm <- read.csv("nx.csv")
 yNorm <- read.csv("ny.csv")
 
 rawData <- summaryMeasures
 
 # note: 16 trials manually removed before processing..total of 51*256=13056 trials completed
+# also manually removed error trials from processed.csv; this makes RTs import correctly
 # clean up data
-dataStep3<-subset(rawData,subset=accuracy==1) # remove errors
+#dataStep3<-subset(rawData,subset=accuracy==1) # remove errors
 
 meanInit<-mean(dataStep3$init_time)
 sdInit<-sd(dataStep3$init_time)
